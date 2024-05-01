@@ -5,7 +5,7 @@ const RegisterForm = () => {
   const [customerInfo, SetCustomerInfo] = useState({
     customerName: "",
     lastname: "",
-    phoneNumberIndex: "",
+    phoneNumberIndex: "+995",
     phoneNumber: "",
     businessName: "",
     aboutCustomer: "",
@@ -14,11 +14,22 @@ const RegisterForm = () => {
   const [isSubmited, setIsSubmited] = useState(false);
   const [filledValue, setFilledValue] = useState({});
 
+  const notEmpty = () => {
+    return (
+      customerInfo.customerName.trim() &&
+      customerInfo.lastname.trim() &&
+      customerInfo.phoneNumber.trim() &&
+      customerInfo.businessName.trim &&
+      customerInfo.aboutCustomer.trim() &&
+      customerInfo.isChecked
+    );
+  };
+
   const clear = () => {
     SetCustomerInfo({
       customerName: "",
       lastname: "",
-      phoneNumberIndex: "",
+      phoneNumberIndex: "+995",
       phoneNumber: "",
       businessName: "",
       aboutCustomer: "",
@@ -69,6 +80,7 @@ const RegisterForm = () => {
                 id="exampleSelect"
                 name="select"
                 type="select"
+          
               >
                 <option value="+995">+995</option>
                 <option value="+900">+900</option>
@@ -134,7 +146,7 @@ const RegisterForm = () => {
               <Col xs={{ size: 2 }}>
                 <button
                   onClick={() => {
-                    if (customerInfo.isChecked) {
+                    if (notEmpty()) {
                       setIsSubmited(true);
                       setFilledValue({ ...customerInfo });
                       clear();
